@@ -24,6 +24,7 @@ A 3D medical viewer built with vtk-js
 ## Samples
 ![Demo Sample](docs/demo.png)
 ![Demo2 Sample](docs/demo2.png)
+![Demo3 Sample](docs/demo3.png)
 
 ## Implementation Details
 ### Thought Process
