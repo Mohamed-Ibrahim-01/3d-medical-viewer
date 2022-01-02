@@ -23,18 +23,20 @@ A 3D medical viewer built with vtk-js
 
 ## Samples
 ![Demo Sample](docs/demo.png)
+![Demo2 Sample](docs/demo2.png)
 
 ## Implementation Details
 ### Thought Process
-First we started by the design we need to accomplish. And that is the `final result` in the design 
+First we started by the design we need to accomplish. And this is the `final result` as belo. As in the design 
 phase as we made more than one design and we choosed only one at the end.
 
 ![Design Sample](docs/design.png)
+
 Then our thought process was like that.
 - Only make head marching cubes example work.
 - Only make ray casting example work.
 - Adding ray casting and volume rendring to `ImageCroppingWidget`
-- Making a statful control panel to control each wiget.
+- Making a stateful control panel to control each wiget.
 - Adding the adjustable transfer function.
 - Adding some prests for color maps.
 
@@ -69,7 +71,7 @@ document.getElementById('examples-menu').addEventListener('change', function () 
 
 ```
 
-The `renderHead` function is used to load and render the marching cubes with the `head data set`
+The `renderHead` function is used to load and render the marching cubes with the `head` data set
 
 ```javaScript
 
@@ -83,7 +85,14 @@ async function renderChest() {
         await chestReaderSource.loadData();
                     .
                     .
+                 
+        initCroppingEventListeners(croppingWidget);
+        widgetManager.addWidget(croppingWidget);
+        renderer.addVolume(chestActor);
+                    
                     .
+                    .
+
 ```
 
 The `renderChest` function is used to load and render the ray casting with the `chest` data set 
@@ -98,6 +107,12 @@ async function renderChest() {
         await chestReaderSource.setUrl('https://kitware.github.io/vtk-js/data/volume/LIDC2.vti');
         await chestReaderSource.loadData();
                     .
+                    .
+                    
+        initSliderEventListener(dataRange, firstIsoValue);
+        marchingCube.setContourValue(firstIsoValue)
+        renderer.addActor(headActor)
+        
                     .
                     .
 
