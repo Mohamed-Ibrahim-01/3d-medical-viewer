@@ -39,9 +39,7 @@ Then our thought process was like that.
 - Adding some prests for color maps.
 
 ### Solution
-After that we started the implementation with the help of the provided example in the docs.
-We have tried a lot of things in react but we faced a lot of problems so we swithced back to 
-vanilla js.
+After that we started the implementation with the help of the provided examples in the docs.
 
 The core function in the appliction is the switching between rendering actors which we control via an option box and the event attached to it is as follow.
 ```javaScript
