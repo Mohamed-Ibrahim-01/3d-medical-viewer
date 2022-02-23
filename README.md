@@ -1,4 +1,4 @@
-# SBE306 Assignment 4 (VTK) 
+# 3D medical viewer (VTK) 
 
 - [Description](#description)
 - [Team](#team)
@@ -9,17 +9,16 @@
 - [Issues](#issues)
 
 ## Description
-A 3D medical viewer built with vtk-js
+A 3D medical viewer built with vtk-js that supports volume rendering with multiple presets and marching cubes.
 
 ## Team
-### Team Name : cg-gang
 ### Team Members
-| Name         | Section     | BN |
-|--------------|-----------|------------|
-| Saied Salem Saied     | 1 | **36**       |
-| Mohamed Ahmed Mohamed Ibrahim | 2      | **11**        |
-| Moaaz Nasser Ibrahim     | 2 | **33**       |
-| Yasin Essam Mohamed      | 2 | **49**       |
+| Name|
+|----------------|
+| Saied Salem|
+| Mohamed Ibrahim|
+| Moaaz Nasser|
+| Yasin Essam|
 
 ## Samples
 ![Demo Sample](docs/demo.png)
@@ -28,9 +27,7 @@ A 3D medical viewer built with vtk-js
 
 ## Implementation Details
 ### Thought Process
-First we started by the design we need to accomplish. And this is the `final result` as belo. As in the design 
-phase as we made more than one design and we choosed only one at the end.
-
+First we started by the design we need to accomplish. And this is the `final result` as below.
 ![Design Sample](docs/design.png)
 
 Then our thought process was like that.
@@ -76,23 +73,26 @@ The `renderHead` function is used to load and render the marching cubes with the
 
 ```javaScript
 
-async function renderChest() {
+async function renderHead() {
     try {
         renderer.removeAllViewProps();
-        genericRenderWindow.resize();
         renderWindow.render();
 
-        await chestReaderSource.setUrl('https://kitware.github.io/vtk-js/data/volume/LIDC2.vti');
-        await chestReaderSource.loadData();
-                    .
-                    .
-                 
-        initCroppingEventListeners(croppingWidget);
-        widgetManager.addWidget(croppingWidget);
-        renderer.addVolume(chestActor);
-                    
-                    .
-                    .
+        await headReaderSource.setUrl("https://kitware.github.io/vtk-js/data/volume/headsq.vti")
+        await headReaderSource.loadData();
+
+                        .
+                        .
+
+        initSliderEventListener(dataRange, firstIsoValue);
+
+        marchingCube.setContourValue(firstIsoValue)
+        renderer.addActor(headActor)
+
+                        .
+                        .
+    }
+}
 
 ```
 
@@ -119,7 +119,7 @@ async function renderChest() {
 
 ```
 
-## Issues
+## Issues we tackled
 
 **1. Migration from vtk.js to @kitware/vtk.js**
 
@@ -145,5 +145,3 @@ We were using the `vtkFullScreenRenderWindow` but to add the control panel and c
 **6. Adding the control panel as sidebar**
 
 The control panel to be shown as a sidebar we used a `flex box` with column-direction
-
-[![Open in Visual Studio Code](https://classroom.github.com/assets/open-in-vscode-f059dc9a6f8d3a56e377f745f24479a46679e63a5d9fe6f495e02850cd0d8118.svg)](https://classroom.github.com/online_ide?assignment_repo_id=6634792&assignment_repo_type=AssignmentRepo)
